@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSC Category White Space — Chief of Staff Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════ */
+:root {
+  --black: #080808;
+  --dark: #0F0F0F;
+  --card: #141414;
+  --border: #222222;
+  --border-light: #2A2A2A;
+  --white: #F0EDE8;
+  --white-dim: rgba(240,237,232,0.55);
+  --white-faint: rgba(240,237,232,0.18);
+  --red: #C8331A;
+  --red-dim: rgba(200,51,26,0.15);
+  --red-glow: rgba(200,51,26,0.06);
+  --gold: #C4922A;
+  --gold-dim: rgba(196,146,42,0.12);
+  --green: #2E6B4F;
+  --green-dim: rgba(46,107,79,0.15);
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Syne', sans-serif;
+  --serif: 'Playfair Display', serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════
+   GRAIN TEXTURE OVERLAY
+═══════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════
+   NAV / PROGRESS
+═══════════════════════════════════ */
+.doc-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 52px;
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+}
+
+.nav-brand span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.progress-bar {
+  position: fixed;
+  top: 52px; left: 0;
+  height: 2px;
+  background: var(--red);
+  z-index: 101;
+  transition: width 0.1s;
+  width: 0%;
+}
+
+/* ═══════════════════════════════════
+   COVER
+═══════════════════════════════════ */
+.cover {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 52px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Diagonal accent line */
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 140px;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 5%, var(--red) 30%, var(--red) 70%, transparent 95%);
+  opacity: 0.35;
+}
+
+.cover-inner {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  align-items: end;
+  padding: 80px 60px 0;
+}
+
+.cover-left { padding-right: 60px; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: var(--red);
+}
+
+.eyebrow-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.cover-headline {
+  font-family: var(--serif);
+  font-size: clamp(52px, 6vw, 82px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+}
+
+.cover-headline .accent {
+  color: var(--red);
+  font-style: italic;
+}
+
+.cover-headline .dim {
+  color: var(--white-dim);
+}
+
+.cover-sub {
+  font-size: 16px;
+  color: var(--white-dim);
+  line-height: 1.65;
+  max-width: 540px;
+  margin-bottom: 48px;
+  border-left: 2px solid var(--red);
+  padding-left: 20px;
+}
+
+.cover-meta-strip {
+  display: flex;
+  gap: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.meta-item { }
+
+.meta-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-bottom: 4px;
+}
+
+.meta-val {
+  font-size: 13px;
+  color: var(--white-dim);
+  font-weight: 500;
+}
+
+/* Cover right panel */
+.cover-right {
+  border-left: 1px solid var(--border);
+  padding: 60px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cover-kpi {
+  background: var(--card);
+  padding: 22px 20px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.cover-kpi:hover { border-color: var(--red); }
+
+.cover-kpi.primary {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.cover-kpi.primary .kpi-num { color: white; }
+.cover-kpi.primary .kpi-label { color: rgba(255,255,255,0.75); }
+
+.kpi-num {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--white);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.kpi-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  line-height: 1.4;
+}
+
+/* Cover bottom banner */
+.cover-banner {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  overflow-x: auto;
+}
+
+.banner-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.banner-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+.banner-text {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--white-dim);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════
+   DOCUMENT BODY
+═══════════════════════════════════ */
+.doc-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 60px;
+}
+
+/* ═══════════════════════════════════
+   SECTION SHELL
+═══════════════════════════════════ */
+.section {
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0;
+  align-items: start;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-num {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--border-light);
+  margin-top: -8px;
+  letter-spacing: -0.03em;
+}
+
+.section-head-right { padding-left: 24px; border-left: 1px solid var(--border); }
+
+.section-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--white-dim);
+}
+
+/* ═══════════════════════════════════
+   PROSE
+═══════════════════════════════════ */
+p {
+  color: rgba(240,237,232,0.78);
+  margin-bottom: 18px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+p:last-child { margin-bottom: 0; }
+
+strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════
+   CALLOUT
+═══════════════════════════════════ */
+.callout {
+  background: var(--red-dim);
+  border: 1px solid rgba(200,51,26,0.3);
+  border-left: 3px solid var(--red);
+  padding: 20px 24px;
+  margin: 28px 0;
+  font-size: 14.5px;
+  color: var(--white-dim);
+  line-height: 1.7;
+}
+
+.callout strong { color: var(--red); }
+
+.callout-gold {
+  background: var(--gold-dim);
+  border: 1px solid rgba(196,146,42,0.25);
+  border-left: 3px solid var(--gold);
+}
+
+.callout-gold strong { color: var(--gold); }
+
+/* ═══════════════════════════════════
+   STAT ROW
+═══════════════════════════════════ */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+
+.stat-row.col3 { grid-template-columns: repeat(3, 1fr); }
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 24px 20px;
+  text-align: center;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.stat-card:hover { border-color: var(--border-light); background: #1A1A1A; }
+
+.stat-card.red { background: var(--red); border-color: var(--red); }
+.stat-card.red .stat-big, .stat-card.red .stat-label { color: white; }
+
+.stat-big {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.stat-big.gold { color: var(--gold); }
+.stat-big.red { color: var(--red); background: none; border: none; }
+.stat-big.dim { color: var(--white-dim); }
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  line-height: 1.45;
+  display: block;
+}
+
+/* ═══════════════════════════════════
+   TABLE
+═══════════════════════════════════ */
+.table-wrap {
+  margin: 32px 0;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  background: #111111;
+  color: var(--white-dim);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 400;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: rgba(240,237,232,0.72);
+  vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+tbody tr.highlight td {
+  background: var(--red-dim);
+}
+
+tbody tr.highlight td:first-child {
+  border-left: 3px solid var(--red);
+}
+
+.check { color: #4CAF50; font-size: 14px; }
+.cross { color: #E53935; font-size: 14px; }
+.partial { color: var(--gold); font-size: 13px; }
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+.badge-primary { background: var(--red); color: white; }
+.badge-secondary { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(196,146,42,0.35); }
+.badge-out { background: rgba(255,255,255,0.05); color: var(--white-dim); border: 1px solid var(--border); }
+.badge-warn { background: rgba(255,152,0,0.12); color: #FF9800; border: 1px solid rgba(255,152,0,0.25); }
+
+/* ═══════════════════════════════════
+   PRODUCT MAP GRID
+═══════════════════════════════════ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+
+.product-cat {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-bottom: 8px;
+}
+
+.product-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.product-skus {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--white-dim);
+  margin-bottom: 8px;
+}
+
+.product-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.product-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+.fill-strong { background: #4CAF50; }
+.fill-med { background: var(--gold); }
+.fill-thin { background: var(--red); }
+.fill-none { background: var(--border-light); width: 8%; }
+
+.product-status {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status-strong { color: #4CAF50; }
+.status-med { color: var(--gold); }
+.status-thin { color: var(--red); }
+.status-absent { color: var(--red); }
+
+/* ═══════════════════════════════════
+   COMPETITOR COVERAGE
+═══════════════════════════════════ */
+.comp-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 2px;
+  transition: border-color 0.2s;
+}
+
+.comp-row:hover { border-color: var(--border-light); }
+
+.comp-brand {
+  background: var(--card);
+  padding: 16px 18px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.comp-brand-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+
+.comp-brand-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+.comp-cells {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.comp-cell {
+  padding: 14px 10px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark);
+}
+
+.comp-cell:last-child { border-right: none; }
+.comp-cell.bsc { background: rgba(200,51,26,0.06); }
+
+.comp-header-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0;
+  margin-bottom: 2px;
+}
+
+.comp-header-brand {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  padding: 10px 18px;
+}
+
+.comp-header-cells {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px solid var(--border);
+  background: #0D0D0D;
+}
+
+.comp-header-cell {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  padding: 10px 8px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  line-height: 1.3;
+}
+
+.comp-header-cell:last-child { border-right: none; }
+
+/* ═══════════════════════════════════
+   PERSONA
+═══════════════════════════════════ */
+.persona-block {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 32px;
+  margin: 32px 0;
+  align-items: start;
+}
+
+.persona-avatar {
+  width: 88px; height: 88px;
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
+  flex-shrink: 0;
+}
+
+.persona-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.persona-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.ptags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.ptag {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  color: var(--white-dim);
+  text-transform: uppercase;
+}
+
+.persona-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--white-dim);
+  border-left: 3px solid var(--red);
+  padding-left: 18px;
+  margin-top: 14px;
+}
+
+/* ═══════════════════════════════════
+   GTM PHASES
+═══════════════════════════════════ */
+.phases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+
+.phase {
+  border: 1px solid var(--border);
+  padding: 28px 24px;
+  background: var(--card);
+  position: relative;
+  overflow: hidden;
+}
+
+.phase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.phase-1::before { background: var(--white-faint); }
+.phase-2::before { background: var(--gold); }
+.phase-3::before { background: var(--red); }
+
+.phase-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-bottom: 6px;
+}
+
+.phase-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.phase-items {
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.phase-items li {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--white-dim);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.phase-items li::before {
+  content: '→';
+  color: var(--red);
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 11px;
+}
+
+.phase-items li:last-child { border-bottom: none; }
+
+.phase-kpi {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  line-height: 1.6;
+}
+
+.phase-kpi strong { color: var(--gold); }
+
+/* ═══════════════════════════════════
+   MOAT SPLIT
+═══════════════════════════════════ */
+.moat-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 32px 0;
+}
+
+.moat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 28px;
+}
+
+.moat-card.have { border-top: 3px solid #4CAF50; }
+.moat-card.build { border-top: 3px solid var(--gold); }
+
+.moat-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.moat-tag.have { color: #4CAF50; }
+.moat-tag.build { color: var(--gold); }
+
+.moat-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+
+.moat-item:last-child { border-bottom: none; }
+
+.moat-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.moat-dot.have { background: #4CAF50; }
+.moat-dot.build { background: var(--gold); }
+
+/* ═══════════════════════════════════
+   RISK CARDS
+═══════════════════════════════════ */
+.risk-list { display: flex; flex-direction: column; gap: 2px; margin: 32px 0; }
+
+.risk-card {
+  display: grid;
+  grid-template-columns: 64px 1fr 1fr;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.risk-num-col {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+}
+
+.risk-num {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--border-light);
+  line-height: 1;
+}
+
+.risk-col {
+  padding: 22px 24px;
+  border-right: 1px solid var(--border);
+}
+
+.risk-col:last-child { border-right: none; }
+
+.risk-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.risk-label.threat { color: #E53935; }
+.risk-label.mit { color: #4CAF50; }
+
+.risk-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.risk-body {
+  font-size: 13px;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════
+   SKU RANGE
+═══════════════════════════════════ */
+.sku-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+
+.sku-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 24px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sku-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent);
+}
+
+.sku-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+
+.sku-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.sku-price {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.sku-actives {
+  font-size: 12px;
+  color: var(--white-faint);
+  line-height: 1.5;
+  font-family: var(--mono);
+}
+
+/* ═══════════════════════════════════
+   IPO FIT SECTION
+═══════════════════════════════════ */
+.ipo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+
+.ipo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 26px 22px;
+}
+
+.ipo-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.ipo-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.ipo-body {
+  font-size: 13px;
+  color: var(--white-dim);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════
+   SO WHAT — CLOSING SECTION
+═══════════════════════════════════ */
+.so-what {
+  background: var(--red);
+  padding: 72px 60px;
+  margin: 100px -60px -100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.so-what::before {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 300px;
+  font-weight: 900;
+  line-height: 0.8;
+  position: absolute;
+  top: 40px; left: 40px;
+  color: rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+
+.so-what::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(0,0,0,0.15));
+  pointer-events: none;
+}
+
+.so-what-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.so-what-body {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.5;
+  color: white;
+  max-width: 800px;
+  position: relative;
+  letter-spacing: -0.01em;
+}
+
+.so-what-body em {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.so-what-body strong {
+  color: white;
+  font-weight: 700;
+}
+
+/* Footnotes */
+.footnotes {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.4);
+  columns: 2;
+  column-gap: 40px;
+  position: relative;
+}
+
+/* ═══════════════════════════════════
+   DIVIDER
+═══════════════════════════════════ */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+/* ═══════════════════════════════════
+   SCROLL ANIMATION
+═══════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 900px) {
+  .cover-inner { grid-template-columns: 1fr; }
+  .cover-right { border-left: none; border-top: 1px solid var(--border); }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .stat-row.col3 { grid-template-columns: 1fr 1fr; }
+  .phases { grid-template-columns: 1fr; }
+  .moat-split { grid-template-columns: 1fr; }
+  .sku-grid { grid-template-columns: 1fr 1fr; }
+  .ipo-grid { grid-template-columns: 1fr; }
+  .risk-card { grid-template-columns: 1fr; }
+  .risk-num-col { display: none; }
+  .product-grid { grid-template-columns: 1fr 1fr; }
+  .doc-body { padding: 60px 24px; }
+  .so-what { padding: 48px 24px; margin: 60px -24px -60px; }
+  .cover-inner { padding: 60px 24px 0; }
+  .cover-banner { padding: 20px 24px; }
+  .section-header { grid-template-columns: 1fr; }
+  .section-num { font-size: 40px; margin-bottom: 8px; }
+  .doc-nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .cover-meta-strip { flex-wrap: wrap; gap: 20px; }
+  .comp-row { grid-template-columns: 1fr; }
+  .comp-cells { grid-template-columns: repeat(3, 1fr); }
+  .comp-header-cells { grid-template-columns: repeat(3, 1fr); }
+  .persona-block { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .doc-nav, .progress-bar { display: none; }
+  .section { opacity: 1 !important; transform: none !important; }
+  .cover { min-height: auto; }
+  body { padding-top: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="doc-nav">
+  <div class="nav-brand"><span>BSC</span> · Category White Space Brief</div>
+  <ul class="nav-links">
+    <li><a href="#landscape">Market</a></li>
+    <li><a href="#catalogue">Catalogue</a></li>
+    <li><a href="#whitespace">White Space</a></li>
+    <li><a href="#customer">Customer</a></li>
+    <li><a href="#strategic">Strategic Fit</a></li>
+    <li><a href="#gtm">GTM</a></li>
+    <li><a href="#risk">Risk</a></li>
+  </ul>
+</nav>
+<div class="progress-bar" id="progress"></div>
+
+<!-- ════════════════════════════════
+     COVER
+════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-left">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Chief of Staff Application · Category White Space Brief</div>
+      </div>
+      <h1 class="cover-headline">
+        BSC has<br>
+        <span class="accent">zero products</span><br>
+        <span class="dim">for the #1 grooming<br>concern of its core customer</span>
+      </h1>
+      <p class="cover-sub">
+        India's largest D2C men's grooming brand — ₹700 Cr run-rate, IPO-bound — has <strong>no shampoo, no conditioner, no scalp serum</strong> on its website. Hair fall is the #1 concern of its 16–30-year-old core customer. The ₹2,000–3,500 Cr OTC scalp health market has no male-specific D2C owner. This brief tells you exactly what to do about it.
+      </p>
+      <div class="cover-meta-strip">
+        <div class="meta-item"><div class="meta-label">Company</div><div class="meta-val">Bombay Shaving Company</div></div>
+        <div class="meta-item"><div class="meta-label">Prepared by</div><div class="meta-val">Harsh Agarwal · Mesa '26</div></div>
+        <div class="meta-item"><div class="meta-label">Role</div><div class="meta-val">Chief of Staff Application</div></div>
+        <div class="meta-item"><div class="meta-label">Date</div><div class="meta-val">April 2026</div></div>
+      </div>
+    </div>
+
+    <div class="cover-right">
+      <div class="cover-kpi primary">
+        <span class="kpi-num">₹2,000–3,500 Cr</span>
+        <span class="kpi-label">Men's OTC scalp health TAM · growing at 7–10% CAGR</span>
+      </div>
+      <div class="cover-kpi">
+        <span class="kpi-num">Zero</span>
+        <span class="kpi-label">Male-specific D2C scalp care brand in India. No dominant owner exists.</span>
+      </div>
+      <div class="cover-kpi">
+        <span class="kpi-num">50.3%</span>
+        <span class="kpi-label">Indian men under 25 experience hair loss. BSC's #1 unserved concern.</span>
+      </div>
+      <div class="cover-kpi">
+        <span class="kpi-num">₹1,800</span>
+        <span class="kpi-label">Annual per-customer wallet — shampoo + serum on 6–8 week replenishment cycle</span>
+      </div>
+      <div class="cover-kpi">
+        <span class="kpi-num">18–24 mo</span>
+        <span class="kpi-label">BSC's stated IPO timeline. Window to add this category before filing.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-banner">
+    <div class="banner-item"><div class="banner-dot"></div><span class="banner-text">Verified from BSC product catalogue scrape</span></div>
+    <div class="banner-item"><div class="banner-dot"></div><span class="banner-text">Man Matters = pharma/prescription · Not this segment</span></div>
+    <div class="banner-item"><div class="banner-dot"></div><span class="banner-text">Minimalist = unisex · No male-specific positioning</span></div>
+    <div class="banner-item"><div class="banner-dot"></div><span class="banner-text">Beardo, Ustraa = zero scalp serums</span></div>
+    <div class="banner-item"><div class="banner-dot"></div><span class="banner-text">Sources: IMARC, Mordor Intelligence, Fact.MR, Straits Research</span></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     DOCUMENT BODY
+════════════════════════════════ -->
+<div class="doc-body">
+
+  <!-- ── SECTION 01: MARKET LANDSCAPE ── -->
+  <section class="section" id="landscape">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-head-right">
+        <div class="section-tag">Market Landscape</div>
+        <h2 class="section-title">A ₹20,500 Cr market bifurcating fast — and BSC is missing the fastest-growing segment</h2>
+      </div>
+    </div>
+
+    <p>India's men's grooming market reached <strong>₹20,500 Cr (~US$2.3B) in 2024</strong>, growing at 7–8% CAGR toward ₹38,300 Cr by 2033 (IMARC Group, IBEF). But this headline obscures the real story: the market is splitting between commodity categories where incumbents dominate, and structural growth pockets where no brand has planted a flag. Shaving — BSC's origin category — is the former. Hair care is the latter.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <span class="stat-big dim">4–6%</span>
+        <span class="stat-label">Shaving CAGR<br>₹5,000–7,000 Cr<br>Gillette holds ~60%</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-big">12–15%</span>
+        <span class="stat-label">Skincare CAGR<br>₹4,500–6,000 Cr<br>Fastest non-hair segment</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-big gold">7–10%</span>
+        <span class="stat-label">Hair care CAGR<br>₹32,000–39,000 Cr total<br>Anti-hair fall = 50%+ of demand</span>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-big">31.3%</span>
+        <span class="stat-label">Medicated scalp sub-segment CAGR (Future Market Insights)<br>Fastest-growing in personal care</span>
+      </div>
+    </div>
+
+    <p>Three forces are reshaping the market simultaneously. <strong>Premiumisation is permanent:</strong> Gillette India posted a 44% Q1 profit jump driven by premium multi-blade systems. FMCG acquirers are paying premium multiples for D2C brands — Emami paid ₹178 Cr for The Man Company; GCPL acquired Muuchstac; HUL acquired Minimalist at ₹2,670–2,995 Cr. <strong>Male skincare normalisation is accelerating:</strong> 49% of Gen Z Indian men are now highly engaged in facial creams (Mintel, 2024), and the average age of first grooming product purchase continues to fall. <strong>The "skinification of hair" is the defining category trend:</strong> applying face-serum-logic (active ingredients, pH-specific formulations, clinical efficacy claims) to scalp health is the fastest-growing sub-trend in Indian hair care.</p>
+
+    <div class="callout">
+      <strong>The key structural insight:</strong> Hair care is India's single largest personal care segment (₹32,000–39,000 Cr, Mordor Intelligence), yet it remains dominated by mass brands (Dove, Pantene, Clinic Plus) with generic male-female crossover positioning. The premium, male-specific OTC scalp health tier — the segment that should exist between dandruff shampoo and prescription minoxidil — has no owner. BSC is in the best position of any brand to fill it.
+    </div>
+  </section>
+
+  <!-- ── SECTION 02: BSC PRODUCT CATALOGUE ── -->
+  <section class="section" id="catalogue">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-head-right">
+        <div class="section-tag">Verified Product Catalogue — bombayshavingcompany.com</div>
+        <h2 class="section-title">Where BSC is strong, where it's thin, and where it has <em>nothing at all</em></h2>
+      </div>
+    </div>
+
+    <p>A full scrape of BSC's D2C site, cross-verified on Amazon, Nykaa, and Flipkart, maps approximately <strong>85+ SKUs across 7 categories</strong>. The pattern is unmistakable: BSC has depth in hardware and intermittent-purchase products, while systematically absent from daily-use consumable categories — most starkly, head hair care.</p>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-cat">Hardware</div>
+        <div class="product-name">Trimmers & Appliances</div>
+        <div class="product-skus">17+ SKUs · ₹499–₹2,999</div>
+        <div class="product-bar"><div class="product-fill fill-strong" style="width:95%"></div></div>
+        <div class="product-status status-strong">★ Revenue Anchor — Full Body, Beard, Groin, Head Shavers</div>
+      </div>
+      <div class="product-card">
+        <div class="product-cat">Fragrance</div>
+        <div class="product-name">EDP + Deo + Roll-On</div>
+        <div class="product-skus">24+ SKUs · ₹225–₹1,995</div>
+        <div class="product-bar"><div class="product-fill fill-strong" style="width:90%"></div></div>
+        <div class="product-status status-strong">★ 8+ scent families, fastest revenue growth</div>
+      </div>
+      <div class="product-card">
+        <div class="product-cat">Shaving Consumables</div>
+        <div class="product-name">Razors, Foam, Post-Shave</div>
+        <div class="product-skus">20+ SKUs · ₹99–₹812</div>
+        <div class="product-bar"><div class="product-fill fill-strong" style="width:88%"></div></div>
+        <div class="product-status status-strong">★ Origin category — Sensi Smart3 entry at ₹99</div>
+      </div>
+      <div class="product-card">
+        <div class="product-cat">Beard Care</div>
+        <div class="product-name">Oil, Wash, Serum, Wax</div>
+        <div class="product-skus">10+ SKUs · ₹245–₹995</div>
+        <div class="product-bar"><div class="product-fill fill-med" style="width:65%"></div></div>
+        <div class="product-status status-med">▲ Developed — Oil, balm, butter, color, styling pen</div>
+      </div>
+      <div class="product-card">
+        <div class="product-cat">Face Skincare</div>
+        <div class="product-name">Face Wash + Scrub + Mask</div>
+        <div class="product-skus">7+ SKUs · ₹29–₹499</div>
+        <div class="product-bar"><div class="product-fill fill-thin" style="width:40%"></div></div>
+        <div class="product-status status-thin">▼ Thin — Face-wash-dominated, no serums, no toner</div>
+      </div>
+      <div class="product-card">
+        <div class="product-cat">Body Care</div>
+        <div class="product-name">Body Wash + Lotion</div>
+        <div class="product-skus">2–3 SKUs · ₹399–₹499</div>
+        <div class="product-bar"><div class="product-fill fill-thin" style="width:18%"></div></div>
+        <div class="product-status status-thin">▼ Thin — 1 body wash, 1 lotion only</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:8px;">
+      <strong>Categories with confirmed zero presence on BSC's D2C site:</strong> Shampoo (head hair) · Conditioner · Scalp serum · Hair oil (head) · Anti-dandruff · Face serum · Face toner · Eye cream · Men's intimate wash. Note: Bombae (women's sub-brand) covers women's intimate wash — BSC men's has none.
+    </div>
+
+    <p>The most damaging absence is <strong>head hair care</strong>. BSC's homepage copy alludes to hair care but there is no active product listing, no "Hair" navigation tab, and no SKU in any channel. For a brand targeting 5 crore bathrooms and describing itself as a "personal care platform," this is not a strategic choice — it is a gap.</p>
+  </section>
+
+  <!-- ── SECTION 03: COMPETITOR MAP ── -->
+  <section class="section" id="whitespace">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-head-right">
+        <div class="section-tag">Competitive Landscape — Verified from competitor websites</div>
+        <h2 class="section-title">Six competitors mapped. <em>None owns male OTC scalp care.</em></h2>
+      </div>
+    </div>
+
+    <p>Every candidate white space was validated against actual competitor product catalogues. The analysis eliminates false positives — categories BSC already has or that are genuinely occupied — before naming the true gap.</p>
+
+    <!-- Competitor table -->
+    <div class="comp-header-row">
+      <div class="comp-header-brand">Brand</div>
+      <div class="comp-header-cells">
+        <div class="comp-header-cell">Shampoo /<br>Conditioner</div>
+        <div class="comp-header-cell">OTC Scalp<br>Serum</div>
+        <div class="comp-header-cell">Anti Hair<br>Fall (OTC)</div>
+        <div class="comp-header-cell">Face<br>Serum</div>
+        <div class="comp-header-cell">Body<br>Lotion</div>
+        <div class="comp-header-cell">Eye<br>Cream</div>
+      </div>
+    </div>
+
+    <div class="comp-row">
+      <div class="comp-brand"><div class="comp-brand-name">BSC</div><div class="comp-brand-sub">Subject brand</div></div>
+      <div class="comp-cells">
+        <div class="comp-cell bsc"><span class="cross">✗</span></div>
+        <div class="comp-cell bsc"><span class="cross">✗</span></div>
+        <div class="comp-cell bsc"><span class="cross">✗</span></div>
+        <div class="comp-cell bsc"><span class="cross">✗</span></div>
+        <div class="comp-cell bsc"><span class="partial">◐</span></div>
+        <div class="comp-cell bsc"><span class="cross">✗</span></div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-brand"><div class="comp-brand-name">The Man Company</div><div class="comp-brand-sub">452 SKUs · Emami-owned</div></div>
+      <div class="comp-cells">
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-brand"><div class="comp-brand-name">Beardo</div><div class="comp-brand-sub">170 SKUs · Marico-owned</div></div>
+      <div class="comp-cells">
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="cross">✗</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-brand"><div class="comp-brand-name">Ustraa</div><div class="comp-brand-sub">63 SKUs · Declining</div></div>
+      <div class="comp-cells">
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="cross">✗</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="cross">✗</span></div>
+        <div class="comp-cell"><span class="cross">✗</span></div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-brand"><div class="comp-brand-name">Man Matters</div><div class="comp-brand-sub">Pharma-first · Minoxidil+Fin</div></div>
+      <div class="comp-cells">
+        <div class="comp-cell"><span class="cross">✗</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="cross">✗</span></div>
+        <div class="comp-cell"><span class="cross">✗</span></div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-brand"><div class="comp-brand-name">Minimalist</div><div class="comp-brand-sub">75 SKUs · HUL-acquired</div></div>
+      <div class="comp-cells">
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="check">✓</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+        <div class="comp-cell"><span class="partial">◐</span></div>
+      </div>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:10px;color:var(--white-faint);margin-top:8px;margin-bottom:28px;">✓ = Strong presence (3+ SKUs) &nbsp; ◐ = Thin/1 SKU &nbsp; ✗ = Absent. Sources: Direct catalogue scrape of each brand's D2C site, April 2026.</p>
+
+    <p>The critical distinction that makes OTC scalp care a genuine white space — not a Man Matters overlap — is <strong>positioning tier</strong>. Man Matters sells Minoxidil 5%/10%, Finasteride, and oral Minoxidil: Schedule H prescription drugs requiring a doctor consultation, priced at ₹800–3,000/month on treatment plans. Traya operates a similar model with Ayurvedic formulations + pharma. <strong>Neither brand competes in the OTC cosmetic scalp care tier</strong> — the Redensyl shampoo you buy on Blinkit, the caffeine serum on Amazon, the scalp exfoliant in D-Mart. That shelf is empty of any male-specific brand.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Candidate Segment</th>
+            <th>BSC Status</th>
+            <th>Men's TAM (₹ Cr)</th>
+            <th>CAGR</th>
+            <th>Male D2C owner?</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>OTC Scalp Health & Anti-Hair Fall</strong></td>
+            <td><span class="badge badge-primary">Zero SKUs</span></td>
+            <td><strong>₹2,000–3,500</strong></td>
+            <td><strong>7–10%</strong></td>
+            <td><strong>None</strong></td>
+            <td><span class="badge badge-primary">Primary Rec.</span></td>
+          </tr>
+          <tr>
+            <td>Men's Face Serum (Vit C, Retinol, Niacinamide)</td>
+            <td><span class="badge badge-out">Zero SKUs</span></td>
+            <td>₹800–1,200</td>
+            <td>12–15%</td>
+            <td>Minimalist (unisex, HUL)</td>
+            <td><span class="badge badge-secondary">Phase 2</span></td>
+          </tr>
+          <tr>
+            <td>Men's Sunscreen (SPF 50+)</td>
+            <td><span class="badge badge-warn">2–3 SKUs — present</span></td>
+            <td>₹1,200–2,200</td>
+            <td>9–11%</td>
+            <td>No male-specific brand</td>
+            <td><span class="badge badge-out">Already has — extend range</span></td>
+          </tr>
+          <tr>
+            <td>Men's Intimate Wash</td>
+            <td><span class="badge badge-warn">Bombae has women's</span></td>
+            <td>₹200–500</td>
+            <td>~10%</td>
+            <td>Nuutjob (tiny)</td>
+            <td><span class="badge badge-out">Too small for primary bet</span></td>
+          </tr>
+          <tr>
+            <td>Men's Lip Care</td>
+            <td><span class="badge badge-warn">1 SKU — present</span></td>
+            <td>₹200–370</td>
+            <td>6–8%</td>
+            <td>TMC bestseller</td>
+            <td><span class="badge badge-out">Eliminate — too small + TMC owns it</span></td>
+          </tr>
+          <tr>
+            <td>Men's Eye Cream</td>
+            <td><span class="badge badge-out">Zero SKUs</span></td>
+            <td>₹50–150</td>
+            <td>5–8%</td>
+            <td>Weak</td>
+            <td><span class="badge badge-out">Too small, too early</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-gold">
+      <strong>Why not face serum as primary?</strong> Minimalist (now HUL-owned at ₹2,670–2,995 Cr valuation) has 18+ serums and has established category authority in ingredient-led skincare. Beardo, TMC, and Ustraa all have 3–8 serums. BSC entering face serums means a three-front war against Minimalist's science positioning, The Man Company's male-specific range, and Beardo's brand equity. OTC scalp care has none of these established competitors in the male-specific tier.
+    </div>
+  </section>
+
+  <!-- ── SECTION 04: CONSUMER TRUTH ── -->
+  <section class="section" id="customer">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-head-right">
+        <div class="section-tag">Consumer Truth</div>
+        <h2 class="section-title">BSC's customer is 16–30, urban, anxious about hair loss — and BSC sells him nothing for it</h2>
+      </div>
+    </div>
+
+    <p>BSC's VP Marketing Gauri Malhotra has publicly stated the brand's target: <em>"The early shaver cohort — typically 16–17 years to 25–26 years old — is the core audience we want to build for."</em> This is the young urban male discovering grooming, buying his first razor or trimmer, and beginning a routine. He is precisely the demographic with the highest hair fall anxiety in India: <strong>50.3% of Indian men under 25 experience hair loss</strong> (Traya Health research, 2024). Hair fall is not an aspirational concern for him — it is his most frequent, most distressing grooming problem.</p>
+
+    <div class="persona-block">
+      <div class="persona-avatar">A</div>
+      <div>
+        <div class="persona-name">Arjun — The Aware Urban Male</div>
+        <div class="persona-title">BSC's Core Customer · 20–32 yrs · Tier 1 City · SEC A/B · Already in the CRM</div>
+        <div class="ptags">
+          <span class="ptag">BSC trimmer owner</span>
+          <span class="ptag">₹6–20L income</span>
+          <span class="ptag">Bought BSC shaving kit</span>
+          <span class="ptag">Shops on Blinkit / Amazon</span>
+          <span class="ptag">Screen-heavy lifestyle</span>
+          <span class="ptag">Notices thinning at 24</span>
+          <span class="ptag">Trusts dermatologists</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--white-dim);margin-bottom:0;">Already bought BSC's Full Body Trimmer (₹2,699) or Flo4 razor. Active on Instagram and YouTube for grooming content. Notices dandruff and scalp oiliness post-gym — uses Head & Shoulders with zero conviction. Aware that hair fall is starting but considers minoxidil "too extreme" for now. Looking for something between a dandruff shampoo and a prescription solution. <strong>Currently uses his girlfriend's Minimalist scalp serum.</strong></p>
+        <div class="persona-quote">"I use anti-dandruff shampoo but it doesn't really do anything. I don't know what else to try — I'm not going to a dermatologist for something like this."</div>
+      </div>
+    </div>
+
+    <p>The behavioral signal that makes this a genuine white space — not just a hypothesis — is the workaround. A significant share of Indian men aged 22–35 regularly use hair and scalp products from the women's or unisex aisle, not out of preference but because <strong>no male-specific alternative exists in the OTC cosmetic tier</strong>. Minimalist's Hair Growth Actives 18% and Anti-Dandruff Scalp Serum are genuinely strong products — but they are marketed with a gender-neutral aesthetic to the Indian skincare enthusiast. BSC's customer doesn't identify with that. He identifies with the brand that made his trimmer.</p>
+
+    <div class="callout">
+      <strong>The secondary segment BSC cannot ignore:</strong> The hair-loss-anxious 30–40-year-old professional — already a BSC fragrance and trimmer customer — who is not yet ready for minoxidil/finasteride but wants an OTC preventive product that addresses sebum overproduction and scalp inflammation. Man Matters captures these customers at the pharma end. Traya captures them on subscription treatment plans. The ₹400–800 OTC shelf serum for this segment — the product he can buy on Blinkit without a consultation — is unclaimed.
+    </div>
+  </section>
+
+  <!-- ── SECTION 05: MARKET SIZING ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-head-right">
+        <div class="section-tag">Market Sizing — Data Verified</div>
+        <h2 class="section-title">₹2,000–3,500 Cr addressable — and BSC needs only 3% conversion to hit ₹100 Cr</h2>
+      </div>
+    </div>
+
+    <p>The total Indian hair care market is <strong>₹32,000–39,000 Cr</strong> per Mordor Intelligence and Bonafide Research, growing at 4.7–6.9% CAGR. Within this, anti-hair fall products account for <strong>over 50% of total hair care search demand</strong> in India (Straits Research). The OTC cosmetic sub-segment (excluding pharma minoxidil/finasteride and institutional/salon products) and carving for the men's portion yields an addressable market of ₹2,000–3,500 Cr. This is a directional estimate — all inputs flagged below.</p>
+
+    <div class="stat-row col3">
+      <div class="stat-card">
+        <span class="stat-big gold">₹32,000–39,000 Cr</span>
+        <span class="stat-label">Total India hair care market (2024)<br>Source: Mordor Intelligence, Bonafide Research</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-big">₹225–290 Cr</span>
+        <span class="stat-label">India scalp serum market specifically<br>9.4–10.4% CAGR · Source: Fact.MR</span>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-big">₹2,000–3,500 Cr</span>
+        <span class="stat-label">Men's OTC anti-hair fall + scalp care TAM<br>Derived estimate — flagged</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sub-segment</th>
+            <th>Est. Men's India Market</th>
+            <th>CAGR</th>
+            <th>Source</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Anti-hair fall (OTC cosmetic, men's)</td>
+            <td>₹1,660–3,320 Cr</td>
+            <td>7–9%</td>
+            <td>Straits Research (50%+ demand), GVR (hair care ₹32–39K Cr total)</td>
+            <td><span class="badge badge-secondary">Medium</span></td>
+          </tr>
+          <tr>
+            <td>Scalp serum (men's portion)</td>
+            <td>₹225–290 Cr</td>
+            <td>9.4–10.4%</td>
+            <td>Fact.MR — India scalp health market</td>
+            <td><span class="badge badge-secondary">Medium</span></td>
+          </tr>
+          <tr>
+            <td>Premium shampoo + conditioner (men's)</td>
+            <td>₹800–1,200 Cr (est.)</td>
+            <td>5–7%</td>
+            <td>IMARC + GVR + derived estimate</td>
+            <td><span class="badge badge-out">Low-Medium</span></td>
+          </tr>
+          <tr class="highlight">
+            <td><strong>Combined addressable (4-SKU range)</strong></td>
+            <td><strong>₹2,000–3,500 Cr</strong></td>
+            <td><strong>7–10%</strong></td>
+            <td>Composite — directional</td>
+            <td><span class="badge badge-warn">Directional</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>The conversion math is compelling without needing aggressive assumptions.</strong> BSC claims 25 million customers. At a conservative 3–5% conversion to a scalp care range priced at ₹450 average ASP on a 6–8 week replenishment cycle, BSC captures <strong>₹675M–1,125M (~₹67–112 Cr) in annual revenue</strong> from its existing base alone — before any new customer acquisition. At full LTV model (shampoo + serum bimonthly repeat), annual wallet per customer is <strong>₹1,200–1,800</strong>. This category does more for BSC's path to ₹1,000 Cr than any other single initiative in the same capital and time envelope.</p>
+  </section>
+
+  <!-- ── SECTION 06: STRATEGIC FIT ── -->
+  <section class="section" id="strategic">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-head-right">
+        <div class="section-tag">Strategic Fit — Chief of Staff Framing</div>
+        <h2 class="section-title">This isn't just a product launch. It's the category that unlocks BSC's IPO narrative.</h2>
+      </div>
+    </div>
+
+    <p>BSC raised ₹136 Cr in Series D (November 2025) from Sixth Sense Ventures with Rahul Dravid among investors — <strong>explicitly as IPO preparation capital</strong>. COO Deepak Gupta stated publicly: the IPO is targeted in 18–24 months, contingent on reaching <strong>₹150 Cr EBITDA, double-digit EBITDA margins, and ₹1,000 Cr revenue</strong> (BW Retail World, March 2026). Annualised run-rate is approximately ₹700 Cr. The gap to ₹1,000 Cr is ₹300 Cr — and it needs to come from categories beyond trimmers and razors.</p>
+
+    <p>Shantanu Deshpande's stated vision is clear: <em>"Three products per bathroom, ten minutes of happiness for every member of the family."</em> He describes BSC as building the <em>"FMCG giants of tomorrow"</em> — a platform, not a shaving brand. The scalp health category is the most direct path from "India's best trimmer + shaving brand" to "India's men's personal care platform." Here is why it solves every IPO-readiness gap simultaneously:</p>
+
+    <div class="ipo-grid">
+      <div class="ipo-card">
+        <span class="ipo-icon">🔄</span>
+        <div class="ipo-title">Repeat Purchase Flywheel</div>
+        <div class="ipo-body">Trimmers purchase every 1–3 years. Razors monthly but low ASP. Shampoo + serum replenish <strong>every 6–8 weeks at ₹450–800/cycle.</strong> This dramatically lifts revenue predictability, subscriber economics, and LTV — the metrics IPO investors underwrite in D2C.</div>
+      </div>
+      <div class="ipo-card">
+        <span class="ipo-icon">📈</span>
+        <div class="ipo-title">Gross Margin Expansion</div>
+        <div class="ipo-body">Hardware (trimmers) carries 35–50% gross margins. Premium scalp serums and treatment shampoos carry <strong>60–72% gross margins</strong> — in line with Minimalist and the premium skincare benchmark. Shifting revenue mix toward consumables directly improves BSC's EBITDA margin toward the IPO-required double digits.</div>
+      </div>
+      <div class="ipo-card">
+        <span class="ipo-icon">🏗️</span>
+        <div class="ipo-title">Platform Narrative</div>
+        <div class="ipo-body">The difference between a ₹947 Cr private valuation and a premium public-market multiple is the story. <strong>"Trimmer company"</strong> trades at 2–3x revenue. <strong>"Men's grooming platform"</strong> trades at 5–8x. Scalp care is the third pillar — after shaving and fragrance — that makes the platform story credible rather than aspirational.</div>
+      </div>
+      <div class="ipo-card">
+        <span class="ipo-icon">⚡</span>
+        <div class="ipo-title">Quick Commerce Distribution Moat</div>
+        <div class="ipo-body">BSC derives ~30% of revenue from Blinkit, Zepto, and Swiggy Instamart — #2 after Gillette for men's shaving on these platforms. Shampoo and scalp serum are <strong>perfect quick-commerce replenishment SKUs</strong>. BSC can occupy the "men's scalp care" shelf on these apps before any competitor negotiates placement.</div>
+      </div>
+      <div class="ipo-card">
+        <span class="ipo-icon">🎯</span>
+        <div class="ipo-title">Zero CAC for First Cohort</div>
+        <div class="ipo-body">BSC's 25 million customers are already in the CRM. The first scalp care launch cohort is a <strong>cross-sell from existing trimmer and razor buyers</strong> — zero customer acquisition cost. No competitive channel requires this. It's the most capital-efficient new category launch in BSC's history if executed as a CRM-first D2C push.</div>
+      </div>
+      <div class="ipo-card">
+        <span class="ipo-icon">🧩</span>
+        <div class="ipo-title">Portfolio Completeness</div>
+        <div class="ipo-body">BSC's bathroom footprint today: razor + shaving foam + trimmer + face wash + fragrance. Adding shampoo + scalp serum adds the <strong>shower occasion</strong> — a new daily touchpoint that keeps BSC top-of-mind every morning, not just at shaving time. This is how you build the "three products per bathroom" Deshpande describes.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-gold">
+      <strong>The CoS framing:</strong> A Chief of Staff's value at BSC is identifying 0→1 moves the CEO should be making, not just optimizing what exists. The scalp care recommendation is exactly this kind of move — it addresses BSC's biggest portfolio gap, accelerates the IPO narrative, and uses existing assets (customer base, D2C infrastructure, contract manufacturing) to enter a ₹2,000+ Cr market with a capital-efficient playbook. That is the kind of strategic thinking this role demands.
+    </div>
+  </section>
+
+  <!-- ── SECTION 07: RIGHT TO WIN ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-head-right">
+        <div class="section-tag">Right to Win</div>
+        <h2 class="section-title">Why BSC — not a new entrant, not Marico, not HUL</h2>
+      </div>
+    </div>
+
+    <div class="moat-split">
+      <div class="moat-card have">
+        <div class="moat-tag have">Assets BSC Already Has</div>
+        <div class="moat-item"><div class="moat-dot have"></div><div><strong>25 million customers — already male, already 16–35.</strong> The scalp care target is in the CRM today. No brand entering this market cold has this advantage. BSC can validate demand with a waitlist email to existing customers before a single production run is ordered.</div></div>
+        <div class="moat-item"><div class="moat-dot have"></div><div><strong>Quick commerce velocity and shelf relationships.</strong> #2 after Gillette on Blinkit for men's shaving. These platform relationships and in-app placement don't require renegotiation — they extend naturally to a new SKU in the same brand portfolio.</div></div>
+        <div class="moat-item"><div class="moat-dot have"></div><div><strong>Established male-first brand trust.</strong> BSC is India's most recalled D2C men's grooming brand. It has spent 10 years normalising the idea that men buy premium grooming products. The scalp care launch doesn't require building category trust — it inherits it.</div></div>
+        <div class="moat-item"><div class="moat-dot have"></div><div><strong>Contract manufacturing infrastructure.</strong> BSC's existing CDMO relationships produce shaving foam, face wash, and beard oil. A scalp serum or treatment shampoo uses the same supply chain without greenfield capex.</div></div>
+        <div class="moat-item"><div class="moat-dot have"></div><div><strong>₹136 Cr fresh capital.</strong> Series D with an explicit mandate to expand categories and retail footprint. The investment case is already made.</div></div>
+      </div>
+      <div class="moat-card build">
+        <div class="moat-tag build">Moats BSC Must Build (18-month window)</div>
+        <div class="moat-item"><div class="moat-dot build"></div><div><strong>Trichological credibility.</strong> Partner with 15–20 AIIMS/board-certified dermatologists and trichologists for clinical validation and influencer advocacy. OTC scalp care buyers trust doctors more than brand claims. This is the non-negotiable pre-launch investment.</div></div>
+        <div class="moat-item"><div class="moat-dot build"></div><div><strong>Formulation differentiation on actives.</strong> Hire one senior hair care formulation specialist. Develop a BSC-proprietary active ingredient stack — Redensyl + caffeine + scalp microbiome prebiotics — that is meaningfully different from Minimalist's generic serum. File a process patent if possible.</div></div>
+        <div class="moat-item"><div class="moat-dot build"></div><div><strong>Content category ownership.</strong> "Men's scalp health" as a BSC-owned YouTube and Instagram vertical — before any competitor builds it. Educational content (post-gym scalp routine, sebum science, scalp pH basics) converts 3–5x higher in this category than product ads. Build the category, then own it.</div></div>
+        <div class="moat-item"><div class="moat-dot build"></div><div><strong>Beardo first-mover watch.</strong> Marico (Beardo's parent) has deep hair care R&D through Parachute and Livon. Beardo has no scalp serum today — but the capability exists. The window to move before Beardo launches is likely 12–18 months. Speed is the moat.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 08: GTM ── -->
+  <section class="section" id="gtm">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-head-right">
+        <div class="section-tag">GTM Framework — 0→1 Roadmap</div>
+        <h2 class="section-title">4 SKUs. 3 phases. ₹4–6 Cr investment. ₹60–100 Cr Year 2 target.</h2>
+      </div>
+    </div>
+
+    <p>The launch range is <strong>"Scalp-first men's hair care"</strong> — positioned as the smart, science-backed choice between generic shampoo and prescription treatment. BSC's superfood ingredient language (charcoal, coffee, turmeric) extends naturally: rosemary for scalp stimulation, caffeine for hair fall, rice protein for strength. The tone is grooming, not clinical.</p>
+
+    <div class="sku-grid">
+      <div class="sku-card">
+        <div class="sku-num">SKU 01 — Hero Entry</div>
+        <div class="sku-name">Anti-Hair Fall Shampoo</div>
+        <div class="sku-price">₹349 / 200ml</div>
+        <div class="sku-actives">Caffeine 2% · Rosemary extract · Biotin · Saw palmetto. Volume driver. Repeat anchor. Blinkit-optimised format.</div>
+      </div>
+      <div class="sku-card">
+        <div class="sku-num">SKU 02 — Premium Anchor</div>
+        <div class="sku-name">Scalp Health Serum</div>
+        <div class="sku-price">₹649 / 30ml</div>
+        <div class="sku-actives">Redensyl 3% · Procapil · Capixyl · Niacinamide. High-margin hero. Dermatologist endorsement vehicle. BSC's "Minimalist killer."</div>
+      </div>
+      <div class="sku-card">
+        <div class="sku-num">SKU 03 — Differentiator</div>
+        <div class="sku-name">Strengthening Conditioner</div>
+        <div class="sku-price">₹399 / 200ml</div>
+        <div class="sku-actives">Keratin · Rice protein · Niacinamide. BSC is the only male D2C brand with a conditioner. Nobody else has it. Own this shelf.</div>
+      </div>
+      <div class="sku-card">
+        <div class="sku-num">SKU 04 — Heritage Bridge</div>
+        <div class="sku-name">Scalp Nourishment Oil</div>
+        <div class="sku-price">₹449 / 100ml</div>
+        <div class="sku-actives">Onion · Fenugreek · Bhringraj · Rosemary. Bridges Ayurvedic trust with modern actives positioning. Offline retail driver.</div>
+      </div>
+    </div>
+
+    <div class="phases">
+      <div class="phase phase-1">
+        <div class="phase-tag">Phase 1 · Months 0–3</div>
+        <div class="phase-name">Validate</div>
+        <ul class="phase-items">
+          <li>Commission 3 formulations from existing CDMO partners — shampoo, serum, conditioner. 8–10 week lead time.</li>
+          <li>Send samples to 500 existing BSC customers segmented by age (22–35) and city (Tier 1). Survey at Day 14 and Day 45.</li>
+          <li>Launch "Men's Scalp Health" content vertical on Instagram and YouTube. Zero product push — pure education. Track follower growth + search lift.</li>
+          <li>Activate 20–30 trichologist micro-influencers. Seed product. Track organic mention rate — target 3%+.</li>
+          <li>Build waitlist landing page. Target: 15,000 sign-ups as launch greenlight.</li>
+        </ul>
+        <div class="phase-kpi"><strong>KPIs:</strong> 15K waitlist · 65%+ trial satisfaction · 3 dermatologist partnerships signed · Serum formula locked</div>
+      </div>
+      <div class="phase phase-2">
+        <div class="phase-tag">Phase 2 · Months 3–9</div>
+        <div class="phase-name">Launch</div>
+        <ul class="phase-items">
+          <li>D2C site launch with "Hair" navigation tab — first time in BSC's history. Email CRM blast to full 25M base segmented by age.</li>
+          <li>Amazon + Flipkart simultaneous with D2C. Blinkit / Zepto SKU listing in Month 4. Nykaa Man in Month 5.</li>
+          <li>Hero SKU: Scalp Health Serum (₹649) — all marketing, editorial, and influencer spend concentrated here. One product, one message.</li>
+          <li>Performance marketing targeting "hair fall solution men," "scalp serum India," "anti dandruff for men" — estimated CAC ≤ ₹350.</li>
+          <li>Combo kit at ₹899 (shampoo + serum). Subscription prompt at second purchase: ₹499/month serum auto-replenishment.</li>
+        </ul>
+        <div class="phase-kpi"><strong>KPIs:</strong> ₹8–12 Cr GMV · 42%+ Day-45 reorder · 4.3+ avg product rating · 500 active subscribers</div>
+      </div>
+      <div class="phase phase-3">
+        <div class="phase-tag">Phase 3 · Months 9–18</div>
+        <div class="phase-name">Scale</div>
+        <ul class="phase-items">
+          <li>Full 4-SKU range live across all channels. SKU 03 (conditioner) — own this shelf position that no male D2C brand has taken.</li>
+          <li>Modern trade rollout: Lifestyle, Shoppers Stop, D-Mart, Reliance Smart. BSC-branded hair care gondola in top 20 cities.</li>
+          <li>Target 5,000 serum subscribers generating ₹2.25 Cr MRR at ₹499/month (₹27 Cr ARR) — before any retail revenue.</li>
+          <li>Explore co-branding with a trichology clinic chain for a "Dermatologist Formulated" variant at ₹999+ — captures the hair-loss-anxious 30–40 segment.</li>
+          <li>Announce category leadership: "India's #1 Men's Scalp Care Brand."</li>
+        </ul>
+        <div class="phase-kpi"><strong>KPIs:</strong> ₹60–100 Cr annualised scalp revenue · 5,000 subscribers · 15%+ of total BSC GMV · Category leadership claimed</div>
+      </div>
+    </div>
+
+    <div class="stat-row col3">
+      <div class="stat-card">
+        <span class="stat-big red">₹4–6 Cr</span>
+        <span class="stat-label">Total 18-month investment<br>R&D ₹50L · Production ₹1.5 Cr<br>Marketing ₹2–3.5 Cr</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-big">62–72%</span>
+        <span class="stat-label">Target gross margin<br>Scalp serum benchmarked<br>against Minimalist/TMC</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-big gold">₹60–100 Cr</span>
+        <span class="stat-label">Year 2 revenue target<br>Conservative: 3–5% of<br>25M customer base converting</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 09: RISK ── -->
+  <section class="section" id="risk">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div class="section-head-right">
+        <div class="section-tag">Risk & Mitigation</div>
+        <h2 class="section-title">Three real risks — none fatal if addressed pre-launch</h2>
+      </div>
+    </div>
+
+    <div class="risk-list">
+      <div class="risk-card">
+        <div class="risk-num-col"><div class="risk-num">01</div></div>
+        <div class="risk-col">
+          <div class="risk-label threat">Threat</div>
+          <div class="risk-title">Beardo / Marico moves first</div>
+          <div class="risk-body">Beardo's parent Marico has India's deepest hair care R&D capability — Parachute, Livon, Hair & Care. Beardo currently has no scalp serum, but the formulation and distribution capability exists. If Beardo launches a male scalp range in the next 6 months, BSC loses first-mover advantage and faces a well-resourced incumbent with stronger offline distribution. This is the highest-probability competitive threat.</div>
+        </div>
+        <div class="risk-col">
+          <div class="risk-label mit">Mitigation</div>
+          <div class="risk-body">Speed is the answer — and BSC has structural speed advantages Beardo lacks. BSC's D2C first model means Phase 1 validation can complete in 8–10 weeks without any traditional trade channel negotiation. The content flag — "Men's Scalp Health" as a YouTube/Instagram vertical — should be planted immediately, before any product is on shelf. Content authority predates brand authority in this category. Additionally, BSC's quick commerce velocity on Blinkit/Zepto is a structural moat Beardo (general trade-heavy, Marico-distributed) cannot rapidly replicate.</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-num-col"><div class="risk-num">02</div></div>
+        <div class="risk-col">
+          <div class="risk-label threat">Threat</div>
+          <div class="risk-title">Product doesn't deliver visible results</div>
+          <div class="risk-body">Unlike face wash or body wash where performance is subjective, scalp serums make implicit clinical claims. A product that doesn't reduce dandruff or hair fall within 8–12 weeks generates negative reviews that travel fast on Amazon and Reddit. This risk is non-trivial — several Indian D2C brands have failed in this category for exactly this reason. Bad reviews on Amazon compound over time and are nearly impossible to recover from.</div>
+        </div>
+        <div class="risk-col">
+          <div class="risk-label mit">Mitigation</div>
+          <div class="risk-body">Do not launch without validated formulations. Use only proven, evidence-backed actives (Redensyl, Procapil, Capixyl — all supported by peer-reviewed cosmetic efficacy studies). Hire a trichology formulation consultant as the first investment before any production run. Run a mandatory 60-day in-home trial with 500 existing customers before public launch — this creates the "1,000 reviews before launch" credibility signal that drives initial conversion and protects against early negative reviews. Set conservative efficacy expectations in marketing: "measurable reduction in hair fall" not "regrowth."</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-num-col"><div class="risk-num">03</div></div>
+        <div class="risk-col">
+          <div class="risk-label threat">Threat</div>
+          <div class="risk-title">Management bandwidth at IPO crunch time</div>
+          <div class="risk-body">BSC's leadership team is simultaneously managing IPO preparation, offline expansion (new retail footprint), Bombae's growth trajectory, and an active D2C + quick commerce operation. A new category launch in this environment competes for CEO attention, CFO bandwidth, and operations capacity. The risk is half-hearted execution — a shampoo launch without a dedicated product manager or category P&L owner that gets deprioritized the moment IPO preparations accelerate.</div>
+        </div>
+        <div class="risk-col">
+          <div class="risk-label mit">Mitigation</div>
+          <div class="risk-body">This is precisely where a Chief of Staff adds value. The scalp care launch should be managed as a self-contained P&L from day one — dedicated budget, dedicated product manager hired before launch, OKRs ring-fenced from the core business. The CoS role is to ensure this category gets the governance structure (weekly review, clear metrics, escalation path) that prevents it from being subsumed by IPO priorities. Recommendation: treat it as a mini-startup within BSC with a dedicated GM, not as a product extension managed by an existing category team.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SO WHAT -->
+  <div class="so-what">
+    <div class="so-what-label">So What — The Boardroom Case</div>
+    <div class="so-what-body">
+      BSC needs ₹300 Cr in incremental revenue to hit its IPO-required ₹1,000 Cr target. It needs double-digit EBITDA margins. It needs a platform narrative that justifies a premium public-market multiple. <strong>OTC men's scalp care is the single category that addresses all three simultaneously</strong> — a ₹2,000–3,500 Cr market growing at 7–10%, no male D2C brand owning it, and BSC's own 25 million customers waiting to be cross-sold. The formulation is straightforward. The distribution rails exist. The customer base is already inside the CRM. The only thing required is the decision to move — and to move in the next 90 days, before Beardo's parent company connects the same dots. <em>Every quarter BSC delays adding hair care, it pays Minimalist's repeat-purchase economics with its own customer's wallet.</em>
+    </div>
+    <div class="footnotes">
+      <div>¹ IMARC Group — India Male Grooming Products Market 2024–2033</div>
+      <div>² Mordor Intelligence — India Hair Care Products Market Size 2024</div>
+      <div>³ Fact.MR — India Scalp Health Market CAGR 9.4–10.4%</div>
+      <div>⁴ Straits Research — Hair Loss Treatment Products Market 2033</div>
+      <div>⁵ Mintel — 49% Gen Z Indian Men Engaged in Facial Creams (2024)</div>
+      <div>⁶ Grand View Research — India Hair & Scalp Care Market 2024</div>
+      <div>⁷ Future Market Insights — Medicated Shampoo CAGR 31.3%</div>
+      <div>⁸ Tracxn — BSC Company Profile FY25 (₹271 Cr FY25 revenue)</div>
+      <div>⁹ Business Standard — BSC raises ₹136 Cr, hits ₹550 Cr run-rate (Nov 2025)</div>
+      <div>¹⁰ BW Retail World — BSC Eyes IPO in 18–24 Months (March 2026)</div>
+      <div>¹¹ Entrackr — Beardo revenue ₹214 Cr FY25; Startup News — TMC ₹154 Cr FY25</div>
+      <div>¹² Social Samosa — Gauri Malhotra on BSC's 16–30 core customer</div>
+      <div>¹³ Founder Thesis — Shantanu Deshpande "FMCG 2.0" interview</div>
+      <div>¹⁴ People Matters — Shantanu Deshpande "three products per bathroom"</div>
+      <div>¹⁵ Product catalogue sources: bombayshavingcompany.com, beardo.in, themancompany.com, ustraa.com, manmatters.com, beminimalist.co, traya.health — scraped April 2026</div>
+      <div>Note: TAM figures are derived estimates from secondary research. Where ranges are shown, they reflect variance across sources. All ₹ figures approximate. Confidence flags applied throughout.</div>
+    </div>
+  </div>
+
+</div><!-- /doc-body -->
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrollTop = doc.scrollTop || document.body.scrollTop;
+  const scrollHeight = doc.scrollHeight - doc.clientHeight;
+  const pct = scrollTop / scrollHeight * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+// Section reveal on scroll
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 80);
+    }
+  });
+}, { threshold: 0.08 });
+
+sections.forEach(s => observer.observe(s));
+
+// Animate product fill bars
+const fills = document.querySelectorAll('.product-fill');
+const fillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.width = entry.target.style.width;
+    }
+  });
+}, { threshold: 0.5 });
+
+fills.forEach(f => {
+  const orig = f.style.width;
+  f.style.width = '0';
+  setTimeout(() => f.style.width = orig, 200);
+  fillObserver.observe(f);
+});
+</script>
+</body>
+</html>
